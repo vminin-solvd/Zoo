@@ -1,6 +1,7 @@
+package Zoo;
+
 import java.util.List;
 import java.util.ArrayList;
-
 
 class Zoo {
     private String name;
@@ -85,6 +86,10 @@ class BaldEagle extends Bird {
     void makeSound() {
         System.out.println("Eagle scream");
     }
+    @Override
+    public String toString() {
+        return "Fun bald eagle fact: eagle nests can get up to 10 feet across and weigh up to 2000 pounds!";
+    }
 }
 
 abstract class Mammal extends Animal {
@@ -102,6 +107,10 @@ class Tiger extends Mammal {
     void makeSound() {
         System.out.println("Tiger roar");
     }
+    @Override
+    public String toString() {
+        return "Fun tiger fact: When a male lion breeds with a female tiger they create a liger which is larger than either a tiger or lion. These are not found in nature, only in zoos.";
+    }
 }
 
 abstract class Reptile extends Animal {
@@ -115,9 +124,17 @@ abstract class Reptile extends Animal {
 }
 
 class Crocodile extends Reptile {
+    public void Crocodile() {
+        this.setIsVenomous(false);
+        this.setLocation("Crocodile pool");
+    }
     @Override
     void makeSound() {
         System.out.println("Crocodile growl");
+    }
+    @Override
+    public String toString() {
+        return "Fun crocodile fact: Crocodiles are capable of having virgin births through self-reproduction!";
     }
 }
 
@@ -145,6 +162,10 @@ class Visitor extends Person {
     }
     public Ticket getTicket() {
         return this.ticket;
+    }
+    @Override
+    public String toString() {
+        return "Visitor name=" + this.getName() + ", location=" + this.getLocation() + ", ticketID=" +  ticket.getTicketID();
     }
 }
 
@@ -206,6 +227,20 @@ public class Main {
         Tiger tiger = new Tiger();
         tiger.setSex("Male");
         myZoo.addAnimal(tiger);
+        System.out.println(tiger);
+
+        BaldEagle eagle = new BaldEagle();
+        eagle.setSex("Female");
+        eagle.setCanFly(true);
+        myZoo.addAnimal(eagle);
+        System.out.println(eagle);
+
+        Crocodile croc = new Crocodile();
+        croc.setSex("Male");
+        croc.setIsVenomous(false);
+        myZoo.addAnimal(croc);
+        System.out.println(croc);
+
 
         Visitor visitor = new Visitor();
         visitor.setName("Victor");
@@ -221,7 +256,6 @@ public class Main {
 
         System.out.println("Welcome to " + myZoo.getName());
         System.out.println("We have " + myZoo.getAnimals().size() + " animals.");
-        System.out.println("Our latest visitor is " + myZoo.getVisitors().get(0).getName());
 
         myZoo.addLocation("Tiger's Den");
         visitor.setLocation("Tiger's Den");
@@ -231,3 +265,4 @@ public class Main {
         zooKeeper.feedAnimal(tiger);
     }
 }
+
