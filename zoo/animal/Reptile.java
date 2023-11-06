@@ -8,7 +8,7 @@ public abstract class Reptile extends Animal {
         return isVenomous;
     }
 
-    public void setVenomous(boolean isVenomous) {
+    public void setIsVenomous(boolean isVenomous) {
         this.isVenomous = isVenomous;
     }
 }
