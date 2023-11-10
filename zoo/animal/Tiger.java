@@ -1,6 +1,7 @@
 package zoo.animal;
 
-public class Tiger extends Mammal {
+public class Tiger extends Mammal implements IPlay, IDance, IAttack {
+
     @Override
     public void makeSound() {
         System.out.println("Tiger roar");
@@ -8,6 +9,21 @@ public class Tiger extends Mammal {
 
     @Override
     public String toString() {
-        return "Fun tiger fact: When a male lion breeds with a female tiger, they create a liger, which is larger than either a tiger or lion. These are not found in nature, only in zoos.";
+        return "This tiger is currently recovering in its enclosure from an injuer.";
+    }
+
+    @Override
+    public void play() {
+        System.out.println("The tiger chases a liger around the enclosure.");
+    }
+
+    @Override
+    public void dance() {
+        System.out.println("The tiger does a cheeky little twirl");
+    }
+
+    @Override
+    public void attack() {
+        System.out.println("The tiger swipes at the liger");
     }
 }
