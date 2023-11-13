@@ -5,10 +5,15 @@ import zoo.ticket.Ticket;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
 
+import static zoo.Zoo.staticMethod;
+
 public class Main {
     public static void main(String[] args) {
+
         Zoo myZoo = new Zoo();
         myZoo.setName("Victor's Zoo");
+
+        staticMethod();
 
         Tiger tiger = new Tiger();
         tiger.setSex(Sex.MALE);
@@ -46,6 +51,9 @@ public class Main {
         visitor.setLocation("Tiger's Den");
         tiger.setLocation("Tiger's Den");
         zooKeeper.setLocation("Tiger's Den");
+
+        tiger.showSpecies();
+
 
         zooKeeper.feedAnimal(tiger);
     }

@@ -2,7 +2,7 @@ package zoo.person;
 
 import zoo.animal.Animal;
 
-public class ZooKeeper extends Person implements IShout, IComplain{
+public final class ZooKeeper extends Person implements IShout, IComplain{
 
     private int employeeID;
     private int numFood;
@@ -32,7 +32,7 @@ public class ZooKeeper extends Person implements IShout, IComplain{
     }
 
     @Override
-    public void Shout() {
+    public void shout() {
         System.out.println("I LOVE BEING A ZOOKEEPER");
     }
 

@@ -2,7 +2,7 @@ package zoo.person;
 
 import zoo.ticket.Ticket;
 
-public class Visitor extends Person implements IShout, IComplain{
+public final class Visitor extends Person implements IShout, IComplain{
 
     private Ticket ticket;
 
@@ -20,7 +20,7 @@ public class Visitor extends Person implements IShout, IComplain{
     }
 
     @Override
-    public void Shout() {
+    public void shout() {
         System.out.println("WOOOO I AM HAVING SO MUCH FUN");
     }
 

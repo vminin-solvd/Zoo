@@ -1,6 +1,6 @@
 package zoo.animal;
 
-public class Crocodile extends Reptile implements IPlay, IDance, IAttack{
+public final class Crocodile extends Reptile implements IPlay, IDance, IAttack{
 
     public Crocodile() {
         this.setIsVenomous(false);

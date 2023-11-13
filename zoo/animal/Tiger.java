@@ -12,10 +12,6 @@ public class Tiger extends Mammal implements IPlay, IDance, IAttack {
         tigerCount++;
     }
 
-    public static void staticMethod() {
-        System.out.println("This static method can be called with no tiger object created");
-    }
-
     public final String species = "Panthera tigris";
 
     public final void showSpecies() {

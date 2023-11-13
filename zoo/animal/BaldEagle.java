@@ -1,6 +1,6 @@
 package zoo.animal;
 
-public class BaldEagle extends Bird implements IPlay, IDance, IAttack{
+public final class BaldEagle extends Bird implements IPlay, IDance, IAttack{
 
     @Override
     public void makeSound() {

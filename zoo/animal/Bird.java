@@ -1,6 +1,6 @@
 package zoo.animal;
 
-public class Bird extends Animal {
+abstract public class Bird extends Animal {
 
     private boolean canFly;
 
