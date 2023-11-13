@@ -5,7 +5,7 @@ import zoo.ticket.Ticket;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
 
-import static zoo.Zoo.staticMethod;
+import static zoo.Zoo.welcomeVisitor;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class Main {
         Zoo myZoo = new Zoo();
         myZoo.setName("Victor's Zoo");
 
-        staticMethod();
+        welcomeVisitor();
 
         Tiger tiger = new Tiger();
         tiger.setSex(Sex.MALE);
@@ -53,8 +53,6 @@ public class Main {
         zooKeeper.setLocation("Tiger's Den");
 
         tiger.showSpecies();
-
-
         zooKeeper.feedAnimal(tiger);
     }
 }

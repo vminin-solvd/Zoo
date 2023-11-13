@@ -16,7 +16,7 @@ public class Zoo {
     private List<String> locations = new ArrayList<>();
     private List<ZooKeeper> zookeepers = new ArrayList<>();
 
-    public static void staticMethod() {
+    public static void welcomeVisitor() {
         System.out.println("Enjoy your visit today at the Zoo!");
     }
 
