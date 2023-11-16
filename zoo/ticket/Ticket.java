@@ -6,7 +6,6 @@ public class Ticket {
     private float discount;
     private float cost;
 
-    // Getters
     public int getTicketID() {
         return this.ticketID;
     }
@@ -19,7 +18,6 @@ public class Ticket {
         return this.cost;
     }
 
-    // Setters
     public void setTicketID(int ticketID) {
         this.ticketID = ticketID;
     }

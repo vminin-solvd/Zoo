@@ -3,7 +3,7 @@ package zoo.animal;
 public abstract class Animal {
 
     private String location;
-    private String sex;
+    private Sex sex;
 
     public String getLocation() {
         return location;
@@ -13,11 +13,11 @@ public abstract class Animal {
         this.location = location;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 

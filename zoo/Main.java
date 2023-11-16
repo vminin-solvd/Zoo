@@ -4,26 +4,30 @@ import zoo.animal.*;
 import zoo.ticket.Ticket;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
-import zoo.zoo.Zoo;
+
+import static zoo.Zoo.welcomeVisitor;
 
 public class Main {
     public static void main(String[] args) {
+
         Zoo myZoo = new Zoo();
         myZoo.setName("Victor's Zoo");
 
+        welcomeVisitor();
+
         Tiger tiger = new Tiger();
-        tiger.setSex("Male");
+        tiger.setSex(Sex.MALE);
         myZoo.addAnimal(tiger);
         System.out.println(tiger);
 
         BaldEagle eagle = new BaldEagle();
-        eagle.setSex("Female");
+        eagle.setSex(Sex.FEMALE);
         eagle.setCanFly(true);
         myZoo.addAnimal(eagle);
         System.out.println(eagle);
 
         Crocodile croc = new Crocodile();
-        croc.setSex("Male");
+        croc.setSex(Sex.MALE);
         croc.setIsVenomous(false);
         myZoo.addAnimal(croc);
         System.out.println(croc);
@@ -48,6 +52,7 @@ public class Main {
         tiger.setLocation("Tiger's Den");
         zooKeeper.setLocation("Tiger's Den");
 
+        tiger.showSpecies();
         zooKeeper.feedAnimal(tiger);
     }
 }

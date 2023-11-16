@@ -1,6 +1,6 @@
 package zoo.animal;
 
-public class BaldEagle extends Bird {
+public final class BaldEagle extends Bird implements IPlay, IDance, IAttack{
 
     @Override
     public void makeSound() {
@@ -9,6 +9,21 @@ public class BaldEagle extends Bird {
 
     @Override
     public String toString() {
-        return "Bald Eagle: nests can get up to 10 feet across and weigh up to 2000 pounds!";
+        return "This bald eagle is currently laying on its eggs in the nest.";
+    }
+
+    @Override
+    public void play() {
+        System.out.println("The bald eagle plays fetch with zookeeper");
+    }
+
+    @Override
+    public void dance() {
+        System.out.println("The bald eagle tap dances in its enclosure");
+    }
+
+    @Override
+    public void attack() {
+        System.out.println("The bald eagle claws at a crow in the enclosure");
     }
 }

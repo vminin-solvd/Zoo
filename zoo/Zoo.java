@@ -1,4 +1,4 @@
-package zoo.zoo;
+package zoo;
 
 import zoo.animal.Animal;
 import zoo.person.Person;
@@ -16,7 +16,10 @@ public class Zoo {
     private List<String> locations = new ArrayList<>();
     private List<ZooKeeper> zookeepers = new ArrayList<>();
 
-    // Setters and Getters for Zoo
+    public static void welcomeVisitor() {
+        System.out.println("Enjoy your visit today at the Zoo!");
+    }
+
     public String getName() {
         return this.name;
     }
@@ -57,12 +60,13 @@ public class Zoo {
         zookeepers.add(zookeeper);
     }
 
-    // Functionality Methods
-    public boolean moveLocation(Person person, String location) {
+    public void moveLocation(Person person, String location) {
         if (locations.contains(location)) {
             person.setLocation(location);
-            return true;
         }
-        return false;
+        else {
+            System.out.println("Location not valid");
+        }
+
     }
 }

@@ -2,7 +2,7 @@ package zoo.person;
 
 import zoo.animal.Animal;
 
-public class ZooKeeper extends Person {
+public final class ZooKeeper extends Person implements IShout, IComplain{
 
     private int employeeID;
     private int numFood;
@@ -29,5 +29,15 @@ public class ZooKeeper extends Person {
             System.out.println(getName() + " feeds " + animal.getClass().getSimpleName());
             animal.makeSound();
         }
+    }
+
+    @Override
+    public void shout() {
+        System.out.println("I LOVE BEING A ZOOKEEPER");
+    }
+
+    @Override
+    public void complain() {
+        System.out.println("WHY IS THERE SO MUCH POO");
     }
 }
