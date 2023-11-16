@@ -1,7 +1,9 @@
 package zoo.person;
 
+import zoo.exceptions.SpeakingException;
+
 public interface IShout {
 
-    void shout();
+    void shout(String shoutString) throws SpeakingException;
 
 }

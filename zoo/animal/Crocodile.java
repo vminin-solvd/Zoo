@@ -1,10 +1,13 @@
 package zoo.animal;
 
+import zoo.Zoo;
+import zoo.exceptions.LocationException;
+
 public final class Crocodile extends Reptile implements IPlay, IDance, IAttack{
 
-    public Crocodile() {
+    public Crocodile(Zoo zoo) throws LocationException {
         this.setIsVenomous(false);
-        this.setLocation("Crocodile pool");
+        this.setLocation("Crocodile pool", zoo);
     }
 
     @Override

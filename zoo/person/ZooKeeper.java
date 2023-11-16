@@ -1,6 +1,8 @@
 package zoo.person;
 
 import zoo.animal.Animal;
+import zoo.exceptions.FeedAnimalException;
+import zoo.exceptions.SpeakingException;
 
 public final class ZooKeeper extends Person implements IShout, IComplain{
 
@@ -23,21 +25,24 @@ public final class ZooKeeper extends Person implements IShout, IComplain{
         this.numFood = numFood;
     }
 
-    public void feedAnimal(Animal animal) {
-        if (numFood > 0 && getLocation().equals(animal.getLocation())) {
+    public void feedAnimal(Animal animal) throws FeedAnimalException {
+        if (numFood > 0 && animal.getLocation().equals(animal.getLocation())) {
             numFood--;
             System.out.println(getName() + " feeds " + animal.getClass().getSimpleName());
             animal.makeSound();
         }
+        else {
+            throw new FeedAnimalException("There is not enough food to feed the animal");
+        }
     }
 
     @Override
-    public void shout() {
-        System.out.println("I LOVE BEING A ZOOKEEPER");
+    public void complain(String complainString) throws SpeakingException {
+
     }
 
     @Override
-    public void complain() {
-        System.out.println("WHY IS THERE SO MUCH POO");
+    public void shout(String shoutString) throws SpeakingException {
+
     }
 }
