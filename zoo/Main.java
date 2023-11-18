@@ -11,30 +11,33 @@ import zoo.ticket.Ticket;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
 
+import java.util.Scanner;
+
 import static zoo.Zoo.welcomeVisitor;
 
 public class Main {
 
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
+
     public static void main(String[] args) throws nameException, LocationException, ExpiredTicketException, FeedAnimalException {
 
         LOGGER.info("DEBUG");
 
         Zoo myZoo = new Zoo();
-        try {
 
-            myZoo.setName("Solvd Zoo");
-        } catch(nameException e) {
-
+        try (Scanner scanner = new Scanner(System.in)) {
+            LOGGER.info("Enter the Zoo's name: ");
+            String zooName = scanner.nextLine();
+            myZoo.setName(zooName);
+        } catch (nameException e) {
             LOGGER.error("Name exception occurred: " + e.getMessage());
-        }
+            }
 
 
         Visitor visitor = new Visitor();
         try {
             visitor.setName("Victor");
-        } catch(nameException e) {
-
+        } catch (nameException e) {
             LOGGER.error("Name exception occurred: " + e.getMessage());
         }
 
@@ -43,9 +46,8 @@ public class Main {
         ticket.setCost(10);
 
         try {
-            ticket.setDate(11, 16, 2023);
-        } catch(ExpiredTicketException e) {
-
+            ticket.setDate(11, 17, 2023);
+        } catch (ExpiredTicketException e) {
             LOGGER.error("ExpiredTicketException occurred: " + e.getMessage());
         }
 
@@ -78,20 +80,18 @@ public class Main {
         ZooKeeper zooKeeper = new ZooKeeper();
         try {
             zooKeeper.setName("Pieter");
-        } catch(nameException e) {
-
+        } catch (nameException e) {
             LOGGER.error("NameException occurred: " + e.getMessage());
         }
 
-        zooKeeper.setNumFood(5);
+        zooKeeper.setNumFood(0);
         myZoo.addZooKeeper(zooKeeper);
 
         try {
             visitor.setLocation("Tiger's Den", myZoo);
             tiger.setLocation("Tiger's Den", myZoo);
             zooKeeper.setLocation("Tiger's Den", myZoo);
-        } catch(LocationException e) {
-
+        } catch (LocationException e) {
             LOGGER.error("LocationException occurred: " + e.getMessage());
         }
 
@@ -99,11 +99,11 @@ public class Main {
         System.out.println("We have " + myZoo.getAnimals().size() + " animals.");
 
         tiger.showSpecies();
-        try{
+        try {
             zooKeeper.feedAnimal(tiger);
-        } catch(FeedAnimalException e) {
+        } catch (FeedAnimalException e) {
 
-            LOGGER.error("FeedAnimalException occurred: "+ e.getMessage());
+            LOGGER.error("FeedAnimalException occurred: " + e.getMessage());
         }
 
     }

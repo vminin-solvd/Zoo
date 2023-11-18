@@ -12,6 +12,7 @@ public class Tiger extends Mammal implements IPlay, IDance, IAttack {
     static int tigerCount = 0;
 
     public Tiger(Zoo zoo) throws LocationException {
+        
         this.setLocation("Tiger's Den", zoo);
         tigerCount++;
     }
