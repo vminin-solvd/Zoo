@@ -5,8 +5,10 @@ import org.apache.logging.log4j.Logger;
 import zoo.animal.*;
 import zoo.exceptions.ExpiredTicketException;
 import zoo.exceptions.FeedAnimalException;
+import zoo.exceptions.InvalidNameException;
 import zoo.exceptions.LocationException;
-import zoo.exceptions.nameException;
+import zoo.linkedlist.CustomLinkedList;
+import zoo.linkedlist.CustomNode;
 import zoo.ticket.Ticket;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
@@ -19,8 +21,18 @@ public class Main {
 
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
-    public static void main(String[] args) throws nameException, LocationException, ExpiredTicketException, FeedAnimalException {
+    public static void main(String[] args) throws InvalidNameException, LocationException, ExpiredTicketException, FeedAnimalException {
 
+        CustomLinkedList linkedList = new CustomLinkedList();
+        CustomNode node1 = new CustomNode(1, null);
+        CustomNode node2 = new CustomNode(2, null);
+        CustomNode node3 = new CustomNode(3, null);
+        linkedList.addNode(node1);
+        linkedList.addNode(node2);
+        linkedList.addNode(node3);
+        linkedList.removeNode(node2);
+        linkedList.removeNode(node1);
+        linkedList.removeNode(node3);
         LOGGER.info("DEBUG");
 
         Zoo myZoo = new Zoo();
@@ -29,7 +41,7 @@ public class Main {
             LOGGER.info("Enter the Zoo's name: ");
             String zooName = scanner.nextLine();
             myZoo.setName(zooName);
-        } catch (nameException e) {
+        } catch (InvalidNameException e) {
             LOGGER.error("Name exception occurred: " + e.getMessage());
             }
 
@@ -37,7 +49,7 @@ public class Main {
         Visitor visitor = new Visitor();
         try {
             visitor.setName("Victor");
-        } catch (nameException e) {
+        } catch (InvalidNameException e) {
             LOGGER.error("Name exception occurred: " + e.getMessage());
         }
 
@@ -63,24 +75,24 @@ public class Main {
         Tiger tiger = new Tiger(myZoo);
         tiger.setSex(Sex.MALE);
         myZoo.addAnimal(tiger);
-        System.out.println(tiger);
+        LOGGER.info(tiger);
 
         BaldEagle eagle = new BaldEagle(myZoo);
         eagle.setSex(Sex.FEMALE);
         eagle.setCanFly(true);
         myZoo.addAnimal(eagle);
-        System.out.println(eagle);
+        LOGGER.info(eagle);
 
         Crocodile croc = new Crocodile(myZoo);
         croc.setSex(Sex.MALE);
         croc.setIsVenomous(false);
         myZoo.addAnimal(croc);
-        System.out.println(croc);
+        LOGGER.info(croc);
 
         ZooKeeper zooKeeper = new ZooKeeper();
         try {
             zooKeeper.setName("Pieter");
-        } catch (nameException e) {
+        } catch (InvalidNameException e) {
             LOGGER.error("NameException occurred: " + e.getMessage());
         }
 
@@ -95,8 +107,8 @@ public class Main {
             LOGGER.error("LocationException occurred: " + e.getMessage());
         }
 
-        System.out.println("Welcome to " + myZoo.getName());
-        System.out.println("We have " + myZoo.getAnimals().size() + " animals.");
+        LOGGER.info("Welcome to " + myZoo.getName());
+        LOGGER.info("We have " + myZoo.getAnimals().size() + " animals.");
 
         tiger.showSpecies();
         try {

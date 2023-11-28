@@ -1,6 +1,5 @@
 package zoo.animal;
 
-
 public abstract class Reptile extends Animal {
 
     private boolean isVenomous;

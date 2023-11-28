@@ -1,39 +1,42 @@
 package zoo;
 
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import zoo.animal.Animal;
+import zoo.exceptions.InvalidNameException;
 import zoo.exceptions.LocationException;
-import zoo.exceptions.nameException;
 import zoo.person.Person;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Zoo {
 
+    private static final Logger LOGGER = LogManager.getLogger(Zoo.class);
     private String name;
+
     private List<Animal> animals = new ArrayList<>();
-    private List<Visitor> visitors = new ArrayList<>();
-    private List<String> locations = new ArrayList<>();
-    private List<ZooKeeper> zookeepers = new ArrayList<>();
+    private Queue<Visitor> visitors = new LinkedList<>();
+    private Map<Integer, Visitor> complainers = new TreeMap<>();
+    private Set<String> locations = new HashSet<>();
+    private HashMap<String, ZooKeeper> zookeepers = new HashMap<>();
 
     public static void welcomeVisitor() {
-        System.out.println("Enjoy your visit today at the Zoo!");
+        LOGGER.info("Enjoy your visit today at the Zoo!");
     }
 
     public String getName() {
         return this.name;
     }
 
-    public void setName(String name) throws nameException {
+    public void setName(String name) throws InvalidNameException {
         Pattern pattern = Pattern.compile("[^a-zA-Z,.!?\'\\- ]");
         Matcher matcher = pattern.matcher(name);
         if ((matcher.find())) {
-            throw new nameException("Name can only contain alphabetical characters!");
+            throw new InvalidNameException("Name can only contain alphabetical characters!");
         }
         this.name = name;
     }
@@ -46,7 +49,7 @@ public class Zoo {
         animals.add(animal);
     }
 
-    public List<Visitor> getVisitors() {
+    public Queue<Visitor> getVisitors() {
         return this.visitors;
     }
 
@@ -54,7 +57,12 @@ public class Zoo {
         visitors.add(visitor);
     }
 
-    public List<String> getLocations() {
+    public Map<Integer, Visitor> getComplainers() {
+
+        return complainers;
+    }
+
+    public Set<String> getLocations() {
         return this.locations;
     }
 
@@ -62,19 +70,30 @@ public class Zoo {
         locations.add(location);
     }
 
-    public List<ZooKeeper> getZookeepers() {
+    public HashMap<String, ZooKeeper> getZookeepers() {
         return this.zookeepers;
     }
 
     public void addZooKeeper(ZooKeeper zookeeper) {
-        zookeepers.add(zookeeper);
+        zookeepers.put(zookeeper.getName(), zookeeper);
+    }
+
+
+    public Visitor processNextVisitor() {
+        return visitors.poll();
     }
 
     public void moveLocation(Person person, String location) throws LocationException {
         if (locations.contains(location)) {
             person.setLocation(location, this);
         } else {
-            System.out.println("Location not valid");
+            LOGGER.info("Location not valid");
         }
+    }
+
+    public void handleComplaint(Visitor visitor, String complainString) {
+
+        complainers.put(visitor.getTicket().getTicketID(), visitor);
+        LOGGER.info(complainString);
     }
 }
