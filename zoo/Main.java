@@ -7,6 +7,8 @@ import zoo.exceptions.ExpiredTicketException;
 import zoo.exceptions.FeedAnimalException;
 import zoo.exceptions.InvalidNameException;
 import zoo.exceptions.LocationException;
+import zoo.linkedlist.CustomLinkedList;
+import zoo.linkedlist.CustomNode;
 import zoo.ticket.Ticket;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
@@ -21,6 +23,16 @@ public class Main {
 
     public static void main(String[] args) throws InvalidNameException, LocationException, ExpiredTicketException, FeedAnimalException {
 
+        CustomLinkedList linkedList = new CustomLinkedList();
+        CustomNode node1 = new CustomNode(1, null);
+        CustomNode node2 = new CustomNode(2, null);
+        CustomNode node3 = new CustomNode(3, null);
+        linkedList.addNode(node1);
+        linkedList.addNode(node2);
+        linkedList.addNode(node3);
+        linkedList.removeNode(node2);
+        linkedList.removeNode(node1);
+        linkedList.removeNode(node3);
         LOGGER.info("DEBUG");
 
         Zoo myZoo = new Zoo();
