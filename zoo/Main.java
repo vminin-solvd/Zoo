@@ -84,6 +84,7 @@ public class Main {
         linkedList.add(tiger);
         linkedList.add(croc);
         linkedList.add(eagle);
+        linkedList.get(1);
         linkedList.remove(tiger);
         linkedList.remove(croc);
         linkedList.remove(eagle);

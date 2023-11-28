@@ -2,7 +2,6 @@ package zoo.linkedlist;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,11 +64,12 @@ public class CustomLinkedList<T> {
         int currentIndex = 0;
         while (currentNode != null) {
             if (currentIndex == index) {
+                LOGGER.info("Data at index {}: {}", index, currentNode.data);
                 return currentNode.data;
             }
             currentIndex++;
             currentNode = currentNode.next;
         }
-        return null; // Throw an exception if the index is out of bounds
+        return null; // FIXME Throw an exception if index is out of bounds
     }
 }
