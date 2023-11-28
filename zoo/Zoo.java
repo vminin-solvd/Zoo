@@ -1,8 +1,9 @@
 package zoo;
 
-import java.util.HashMap;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import zoo.animal.Animal;
@@ -11,16 +12,16 @@ import zoo.exceptions.LocationException;
 import zoo.person.Person;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Zoo {
 
     private static final Logger LOGGER = LogManager.getLogger(Zoo.class);
     private String name;
+
     private List<Animal> animals = new ArrayList<>();
-    private List<Visitor> visitors = new ArrayList<>();
-    private List<String> locations = new ArrayList<>();
+    private Queue<Visitor> visitors = new LinkedList<>();
+    private Map<Integer, Visitor> complainers = new TreeMap<>();
+    private Set<String> locations = new HashSet<>();
     private HashMap<String, ZooKeeper> zookeepers = new HashMap<>();
 
     public static void welcomeVisitor() {
@@ -48,7 +49,7 @@ public class Zoo {
         animals.add(animal);
     }
 
-    public List<Visitor> getVisitors() {
+    public Queue<Visitor> getVisitors() {
         return this.visitors;
     }
 
@@ -56,7 +57,12 @@ public class Zoo {
         visitors.add(visitor);
     }
 
-    public List<String> getLocations() {
+    public Map<Integer, Visitor> getComplainers() {
+
+        return complainers;
+    }
+
+    public Set<String> getLocations() {
         return this.locations;
     }
 
@@ -72,11 +78,22 @@ public class Zoo {
         zookeepers.put(zookeeper.getName(), zookeeper);
     }
 
+
+    public Visitor processNextVisitor() {
+        return visitors.poll();
+    }
+
     public void moveLocation(Person person, String location) throws LocationException {
         if (locations.contains(location)) {
             person.setLocation(location, this);
         } else {
             LOGGER.info("Location not valid");
         }
+    }
+
+    public void handleComplaint(Visitor visitor, String complainString) {
+
+        complainers.put(visitor.getTicket().getTicketID(), visitor);
+        LOGGER.info(complainString);
     }
 }

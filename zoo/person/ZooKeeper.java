@@ -1,15 +1,17 @@
 package zoo.person;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import zoo.Zoo;
 import zoo.animal.Animal;
 import zoo.exceptions.FeedAnimalException;
 import zoo.exceptions.SpeakingException;
 
-public final class ZooKeeper extends Person implements IShout, IComplain {
+public final class ZooKeeper extends Person implements IShout {
 
     private static final Logger LOGGER = LogManager.getLogger(ZooKeeper.class);
     private int employeeID;
     private int numFood;
+    private Zoo zoo;
 
     public int getEmployeeID() {
         return this.employeeID;
@@ -36,15 +38,6 @@ public final class ZooKeeper extends Person implements IShout, IComplain {
         } else {
             throw new FeedAnimalException("There is not enough food to feed the animal");
         }
-    }
-
-    @Override
-    public void complain(String complainString) throws SpeakingException {
-
-        if (complainString == null) {
-            throw new SpeakingException("String cannot be null");
-        }
-        LOGGER.info(complainString);
     }
 
     @Override

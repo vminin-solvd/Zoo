@@ -4,11 +4,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import zoo.exceptions.SpeakingException;
 import zoo.ticket.Ticket;
+import zoo.Zoo;
 
 public final class Visitor extends Person implements IShout, IComplain {
 
     private static final Logger LOGGER = LogManager.getLogger(Visitor.class);
     private Ticket ticket;
+    private Zoo zoo;
 
     public Ticket getTicket() {
         return this.ticket;
@@ -33,13 +35,12 @@ public final class Visitor extends Person implements IShout, IComplain {
     }
 
     @Override
-    public void complain(String complainString) throws SpeakingException {
-
-        if (complainString == null) {
-            throw new SpeakingException("String cannot be null");
+    public void complain(String complainString, Zoo zoo) throws SpeakingException {
+        if (this.zoo != null) {
+            this.zoo.handleComplaint(this, complainString);
+        } else {
+            LOGGER.warn("Zoo reference is not set for this visitor");
         }
-        LOGGER.info(complainString);
     }
-
 
 }
