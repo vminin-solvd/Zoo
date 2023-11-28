@@ -1,5 +1,8 @@
 package zoo.animal;
 
+import zoo.Zoo;
+import zoo.exceptions.LocationException;
+
 public abstract class Animal {
 
     private String location;
@@ -9,7 +12,11 @@ public abstract class Animal {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(String location, Zoo zoo) throws LocationException {
+
+        if (!(zoo.getLocations().contains(location))) {
+            throw new LocationException("This location has not been added to the zoo");
+        }
         this.location = location;
     }
 

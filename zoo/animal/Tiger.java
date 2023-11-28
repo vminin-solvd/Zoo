@@ -1,5 +1,8 @@
 package zoo.animal;
 
+import zoo.Zoo;
+import zoo.exceptions.LocationException;
+
 public class Tiger extends Mammal implements IPlay, IDance, IAttack {
 
     static {
@@ -8,7 +11,9 @@ public class Tiger extends Mammal implements IPlay, IDance, IAttack {
 
     static int tigerCount = 0;
 
-    public Tiger() {
+    public Tiger(Zoo zoo) throws LocationException {
+        
+        this.setLocation("Tiger's Den", zoo);
         tigerCount++;
     }
 

@@ -1,6 +1,11 @@
 package zoo;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 import zoo.animal.Animal;
+import zoo.exceptions.LocationException;
+import zoo.exceptions.nameException;
 import zoo.person.Person;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
@@ -24,7 +29,12 @@ public class Zoo {
         return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws nameException {
+        Pattern pattern = Pattern.compile("[^a-zA-Z,.!?\'\\- ]");
+        Matcher matcher = pattern.matcher(name);
+        if ((matcher.find())) {
+            throw new nameException("Name can only contain alphabetical characters!");
+        }
         this.name = name;
     }
 
@@ -60,13 +70,11 @@ public class Zoo {
         zookeepers.add(zookeeper);
     }
 
-    public void moveLocation(Person person, String location) {
+    public void moveLocation(Person person, String location) throws LocationException {
         if (locations.contains(location)) {
-            person.setLocation(location);
-        }
-        else {
+            person.setLocation(location, this);
+        } else {
             System.out.println("Location not valid");
         }
-
     }
 }

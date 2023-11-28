@@ -1,10 +1,17 @@
 package zoo.animal;
 
-public final class BaldEagle extends Bird implements IPlay, IDance, IAttack{
+import zoo.Zoo;
+import zoo.exceptions.LocationException;
+
+public final class BaldEagle extends Bird implements IPlay, IDance, IAttack {
 
     @Override
     public void makeSound() {
         System.out.println("Eagle scream");
+    }
+
+    public BaldEagle(Zoo zoo) throws LocationException {
+        this.setLocation("Eagle's cage", zoo);
     }
 
     @Override
