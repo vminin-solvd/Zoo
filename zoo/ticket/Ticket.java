@@ -4,6 +4,7 @@ import zoo.exceptions.ExpiredTicketException;
 
 import java.util.Date;
 import java.util.Calendar;
+import java.util.Objects;
 import zoo.utils.DateHandler;
 
 public class Ticket {
@@ -29,6 +30,7 @@ public class Ticket {
     public Date getDate() {
         return this.date;
     }
+
     public void setTicketID(int ticketID) {
         this.ticketID = ticketID;
     }
@@ -51,5 +53,22 @@ public class Ticket {
         calendar.set(Calendar.MONTH, Integer.parseInt(dateParts[0]) - 1); // Months are 0-indexed
         calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateParts[1]));
         this.date = calendar.getTime();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Ticket other = (Ticket) obj;
+        return this.ticketID == other.ticketID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ticketID);
     }
 }
