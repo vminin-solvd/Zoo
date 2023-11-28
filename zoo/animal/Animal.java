@@ -1,6 +1,7 @@
 package zoo.animal;
 
 import zoo.Zoo;
+import zoo.enums.Sex;
 import zoo.exceptions.LocationException;
 
 public abstract class Animal {

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import zoo.animal.Animal;
 import zoo.exceptions.InvalidNameException;
 import zoo.exceptions.LocationException;
+import zoo.exceptions.SpeakingException;
 import zoo.person.Person;
 import zoo.person.Visitor;
 import zoo.person.ZooKeeper;
@@ -58,7 +59,6 @@ public class Zoo {
     }
 
     public Map<Integer, Visitor> getComplainers() {
-
         return complainers;
     }
 
@@ -91,8 +91,10 @@ public class Zoo {
         }
     }
 
-    public void handleComplaint(Visitor visitor, String complainString) {
-
+    public void handleComplaint(Visitor visitor, String complainString) throws SpeakingException {
+        if (complainString == null) {
+            throw new SpeakingException("complainString cannot be empty");
+        }
         complainers.put(visitor.getTicket().getTicketID(), visitor);
         LOGGER.info(complainString);
     }

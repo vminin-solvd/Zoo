@@ -4,6 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import zoo.Zoo;
 import zoo.exceptions.LocationException;
+import zoo.interfaces.IAttack;
+import zoo.interfaces.IDance;
+import zoo.interfaces.IPlay;
 
 public final class BaldEagle extends Bird implements IPlay, IDance, IAttack {
 
@@ -19,11 +22,6 @@ public final class BaldEagle extends Bird implements IPlay, IDance, IAttack {
     }
 
     @Override
-    public String toString() {
-        return "This bald eagle is currently laying on its eggs in the nest.";
-    }
-
-    @Override
     public void play() {
         LOGGER.info("The bald eagle plays fetch with zookeeper");
     }
@@ -36,5 +34,10 @@ public final class BaldEagle extends Bird implements IPlay, IDance, IAttack {
     @Override
     public void attack() {
         LOGGER.info("The bald eagle claws at a crow in the enclosure");
+    }
+
+    @Override
+    public String toString() {
+        return "This bald eagle is currently laying on its eggs in the nest.";
     }
 }

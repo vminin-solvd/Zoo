@@ -3,6 +3,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import zoo.Zoo;
 import zoo.exceptions.LocationException;
+import zoo.interfaces.IAttack;
+import zoo.interfaces.IDance;
+import zoo.interfaces.IPlay;
 
 public class Tiger extends Mammal implements IPlay, IDance, IAttack {
 
@@ -15,7 +18,6 @@ public class Tiger extends Mammal implements IPlay, IDance, IAttack {
     static int tigerCount = 0;
 
     public Tiger(Zoo zoo) throws LocationException {
-        
         this.setLocation("Tiger's Den", zoo);
         tigerCount++;
     }
@@ -32,11 +34,6 @@ public class Tiger extends Mammal implements IPlay, IDance, IAttack {
     }
 
     @Override
-    public String toString() {
-        return "This tiger is currently recovering in its enclosure from an injury.";
-    }
-
-    @Override
     public void play() {
         LOGGER.info("The tiger chases a liger around the enclosure.");
     }
@@ -49,5 +46,10 @@ public class Tiger extends Mammal implements IPlay, IDance, IAttack {
     @Override
     public void attack() {
         LOGGER.info("The tiger swipes at the liger");
+    }
+
+    @Override
+    public String toString() {
+        return "This tiger is currently recovering in its enclosure from an injury.";
     }
 }

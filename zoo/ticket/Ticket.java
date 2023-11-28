@@ -4,7 +4,7 @@ import zoo.exceptions.ExpiredTicketException;
 
 import java.util.Date;
 import java.util.Calendar;
-import java.util.Objects;
+import zoo.utils.DateHandler;
 
 public class Ticket {
 
@@ -41,15 +41,15 @@ public class Ticket {
         this.cost = cost;
     }
 
-    public  void setDate(int month, int day, int year) throws ExpiredTicketException {
+    public void setDate(String dateString) throws ExpiredTicketException {
+        DateHandler dateHandler = new DateHandler();
+        dateHandler.checkDate(dateString);
+
+        String[] dateParts = dateString.split("/");
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month - 1); // Subtract 1 because months are 0-indexed
-        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.YEAR, Integer.parseInt(dateParts[2]));
+        calendar.set(Calendar.MONTH, Integer.parseInt(dateParts[0]) - 1); // Months are 0-indexed
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateParts[1]));
         this.date = calendar.getTime();
-        Date today = Calendar.getInstance().getTime();
-        if(!Objects.equals(date, today)) {
-            throw new ExpiredTicketException("Ticket is not valid for entry today");
-        }
     }
 }

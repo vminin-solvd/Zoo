@@ -3,93 +3,73 @@ package zoo.linkedlist;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomLinkedList<T> {
 
     private static final Logger LOGGER = LogManager.getLogger(CustomLinkedList.class);
     private CustomNode<T> head;
 
     public CustomLinkedList() {
-
         this.head = null;
-
     }
 
-    public void addNode(CustomNode<T> node) {
-
+    public void add(T data) {
+        CustomNode<T> nextNode = null;
+        CustomNode<T> newNode = new CustomNode<>(data, nextNode);
         if (this.head == null) {
-
-            this.head = node;
-        }
-
-        else {
+            this.head = newNode;
+        } else {
             CustomNode<T> currentNode = this.head;
             while (currentNode.next != null) {
-
                 currentNode = currentNode.next;
             }
-            currentNode.next = node;
-
+            currentNode.next = newNode;
         }
-
-        LOGGER.info("Node added");
+        LOGGER.info("Node with data " + data + " added");
     }
 
-    public void removeNode(CustomNode<T> node) {
-
-        CustomNode<T> previousNode = null;
+    public void remove(T data) {
         CustomNode<T> currentNode = this.head;
-        CustomNode<T> nextNode = null;
+        CustomNode<T> previousNode = null;
 
-        if (this.head == node) {
-
-            if (node.next == null) {
-
-                this.head = null;
+        while (currentNode != null) {
+            if (currentNode.data.equals(data)) {
+                if (previousNode == null) {
+                    this.head = currentNode.next;
+                } else {
+                    previousNode.next = currentNode.next;
+                }
+                LOGGER.info("Node with data " + data + " removed");
+                return;
             }
-
-            else {
-
-                this.head.next = node.next;
-            }
-        }
-
-        while (currentNode != node && currentNode != null) {
-
             previousNode = currentNode;
             currentNode = currentNode.next;
-            if (currentNode.next != null) {
-
-                nextNode = currentNode.next;
-            }
         }
+        LOGGER.info("Node with data " + data + " not found");
+    }
 
-        if (previousNode != null) {
-
-            if (currentNode.next == null) {
-
-                previousNode.next = null;
-            }
-
-            else {
-
-                previousNode.next = nextNode;
-            }
+    public List<T> getAll() {
+        List<T> dataList = new ArrayList<>();
+        CustomNode<T> currentNode = this.head;
+        while (currentNode != null) {
+            dataList.add(currentNode.data);
+            currentNode = currentNode.next;
         }
+        return dataList;
+    }
 
-        else {
-
-            if (nextNode != null) {
-
-                this.head = nextNode;
+    public T get(int index) {
+        CustomNode<T> currentNode = this.head;
+        int currentIndex = 0;
+        while (currentNode != null) {
+            if (currentIndex == index) {
+                return currentNode.data;
             }
-
-            else {
-
-                this.head = null;
-            }
+            currentIndex++;
+            currentNode = currentNode.next;
         }
-
-        LOGGER.info("Removed node");
-
+        return null; // Throw an exception if the index is out of bounds
     }
 }

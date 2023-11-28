@@ -16,7 +16,6 @@ public abstract class Person {
     }
 
     public void setName(String name) throws InvalidNameException {
-
         Pattern pattern = Pattern.compile("[^a-zA-Z,.!?\'\\-]");
         Matcher matcher = pattern.matcher(name);
         if (matcher.find()) {
@@ -26,7 +25,6 @@ public abstract class Person {
     }
 
     public void setLocation(String location, Zoo zoo) throws LocationException {
-
         if (!(zoo.getLocations().contains(location))) {
             throw new LocationException("This location has not been added to the zoo");
         }

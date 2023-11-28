@@ -1,4 +1,4 @@
-package zoo.person;
+package zoo.interfaces;
 
 import zoo.Zoo;
 import zoo.exceptions.SpeakingException;

@@ -3,6 +3,7 @@ package zoo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import zoo.animal.*;
+import zoo.enums.Sex;
 import zoo.exceptions.ExpiredTicketException;
 import zoo.exceptions.FeedAnimalException;
 import zoo.exceptions.InvalidNameException;
@@ -23,16 +24,6 @@ public class Main {
 
     public static void main(String[] args) throws InvalidNameException, LocationException, ExpiredTicketException, FeedAnimalException {
 
-        CustomLinkedList linkedList = new CustomLinkedList();
-        CustomNode node1 = new CustomNode(1, null);
-        CustomNode node2 = new CustomNode(2, null);
-        CustomNode node3 = new CustomNode(3, null);
-        linkedList.addNode(node1);
-        linkedList.addNode(node2);
-        linkedList.addNode(node3);
-        linkedList.removeNode(node2);
-        linkedList.removeNode(node1);
-        linkedList.removeNode(node3);
         LOGGER.info("DEBUG");
 
         Zoo myZoo = new Zoo();
@@ -58,7 +49,7 @@ public class Main {
         ticket.setCost(10);
 
         try {
-            ticket.setDate(11, 17, 2023);
+            ticket.setDate("11/17/2023");
         } catch (ExpiredTicketException e) {
             LOGGER.error("ExpiredTicketException occurred: " + e.getMessage());
         }
@@ -88,6 +79,14 @@ public class Main {
         croc.setIsVenomous(false);
         myZoo.addAnimal(croc);
         LOGGER.info(croc);
+
+        CustomLinkedList linkedList = new CustomLinkedList();
+        linkedList.add(tiger);
+        linkedList.add(croc);
+        linkedList.add(eagle);
+        linkedList.remove(tiger);
+        linkedList.remove(croc);
+        linkedList.remove(eagle);
 
         ZooKeeper zooKeeper = new ZooKeeper();
         try {

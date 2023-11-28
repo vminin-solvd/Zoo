@@ -1,4 +1,4 @@
-package zoo.animal;
+package zoo.enums;
 
 public enum Sex {
 
