@@ -1,10 +1,13 @@
 package zoo.person;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import zoo.exceptions.SpeakingException;
 import zoo.ticket.Ticket;
 
 public final class Visitor extends Person implements IShout, IComplain {
 
+    private static final Logger LOGGER = LogManager.getLogger(Visitor.class);
     private Ticket ticket;
 
     public Ticket getTicket() {
@@ -26,7 +29,7 @@ public final class Visitor extends Person implements IShout, IComplain {
         if (shoutString == null) {
             throw new SpeakingException("String cannot be null");
         }
-        System.out.println(shoutString);
+        LOGGER.info(shoutString);
     }
 
     @Override
@@ -35,7 +38,7 @@ public final class Visitor extends Person implements IShout, IComplain {
         if (complainString == null) {
             throw new SpeakingException("String cannot be null");
         }
-        System.out.println(complainString);
+        LOGGER.info(complainString);
     }
 
 

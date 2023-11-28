@@ -1,6 +1,11 @@
 package zoo.animal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 abstract public class Bird extends Animal {
+
+    private static final Logger LOGGER = LogManager.getLogger(Bird.class);
 
     private boolean canFly;
 
@@ -14,6 +19,6 @@ abstract public class Bird extends Animal {
 
     @Override
     public void makeSound() {
-        System.out.println("Bird chirp");
+        LOGGER.info("Bird chirp");
     }
 }
