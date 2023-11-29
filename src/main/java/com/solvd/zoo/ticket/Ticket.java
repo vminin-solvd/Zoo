@@ -3,7 +3,6 @@ package com.solvd.zoo.ticket;
 import com.solvd.zoo.exceptions.ExpiredTicketException;
 
 import java.util.Date;
-import java.util.Calendar;
 import java.util.Objects;
 import com.solvd.zoo.utils.DateHandler;
 
@@ -45,14 +44,9 @@ public class Ticket {
 
     public void setDate(String dateString) throws ExpiredTicketException {
         DateHandler dateHandler = new DateHandler();
+        Date ticketDate = dateHandler.convertDate(dateString);
+        this.date = ticketDate;
         dateHandler.checkDate(dateString);
-
-        String[] dateParts = dateString.split("/");
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, Integer.parseInt(dateParts[2]));
-        calendar.set(Calendar.MONTH, Integer.parseInt(dateParts[0]) - 1); // Months are 0-indexed
-        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateParts[1]));
-        this.date = calendar.getTime();
     }
 
     @Override

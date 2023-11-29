@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class DateHandler {
 
-    public void checkDate(String dateString) throws ExpiredTicketException {
+    public Date convertDate(String dateString) {
         String[] dateParts = dateString.split("/");
         int month = Integer.parseInt(dateParts[0]);
         int day = Integer.parseInt(dateParts[1]);
@@ -19,7 +19,12 @@ public class DateHandler {
         calendar.set(Calendar.MONTH, month - 1); // Subtract 1 because months are 0-indexed
         calendar.set(Calendar.DAY_OF_MONTH, day);
         Date date = calendar.getTime();
+        return date;
+    }
 
+    public void checkDate(String dateString) throws ExpiredTicketException {
+
+        Date date = this.convertDate(dateString);
         Calendar todayCalendar = Calendar.getInstance();
         todayCalendar.set(Calendar.HOUR_OF_DAY, 0);
         todayCalendar.set(Calendar.MINUTE, 0);
