@@ -15,10 +15,10 @@ public class CountUniqueWords {
 
     private static final Logger LOGGER = LogManager.getLogger(Visitor.class);
 
-    public static void countUniqueWord() {
+    public static void countUniqueWord(String fileName) {
 
         try {
-            File file = new File(getResourcePath("FamousPhrases.txt"));
+            File file = new File(getResourcePath(fileName);
             String fileContent = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             String[] words = fileContent.split("\\s+");
             Map<String, Integer> wordCountMap = new HashMap<>();
