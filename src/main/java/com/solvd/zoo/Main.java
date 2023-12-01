@@ -1,6 +1,5 @@
 package com.solvd.zoo;
 
-import com.solvd.zoo.wordcounter.CountUniqueWords;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.zoo.animal.*;
@@ -18,14 +17,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import static com.solvd.zoo.Zoo.welcomeVisitor;
-import static com.solvd.zoo.wordcounter.CountUniqueWords.CountUniqueWord;
+import static com.solvd.zoo.wordcounter.CountUniqueWords.countUniqueWord;
 
 public class Main {
 
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) throws InvalidNameException, LocationException, ExpiredTicketException, FeedAnimalException, IOException {
-        CountUniqueWord();
+        countUniqueWord();
         LOGGER.info("DEBUG");
 
         Zoo myZoo = new Zoo();
