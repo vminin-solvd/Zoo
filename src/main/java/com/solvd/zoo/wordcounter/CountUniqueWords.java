@@ -38,6 +38,7 @@ public class CountUniqueWords {
             LOGGER.error("Error occurred while processing the file", e);
         }
     }
+    
     private static String getResourcePath(String resourceName) {
         return CountUniqueWords.class.getClassLoader().getResource(resourceName).getPath();
     }
