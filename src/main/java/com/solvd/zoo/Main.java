@@ -12,108 +12,88 @@ import com.solvd.zoo.linkedlist.CustomLinkedList;
 import com.solvd.zoo.ticket.Ticket;
 import com.solvd.zoo.person.Visitor;
 import com.solvd.zoo.person.ZooKeeper;
+import java.io.IOException;
 import java.util.Scanner;
 import static com.solvd.zoo.Zoo.welcomeVisitor;
+import static com.solvd.zoo.wordcounter.CountUniqueWords.countUniqueWord;
 
 public class Main {
 
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
-    public static void main(String[] args) throws InvalidNameException, LocationException, ExpiredTicketException, FeedAnimalException {
-
-        LOGGER.info("DEBUG");
-
+    public static void main(String[] args) {
         Zoo myZoo = new Zoo();
+        Visitor visitor = new Visitor();
+        Ticket ticket = new Ticket();
+        ZooKeeper zooKeeper = new ZooKeeper();
+        Tiger tiger = null;
+        BaldEagle eagle = null;
+        Crocodile croc = null;
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            LOGGER.info("Enter the Zoo's name: ");
-            String zooName = scanner.nextLine();
-            myZoo.setName(zooName);
-        } catch (InvalidNameException e) {
-            LOGGER.error("Name exception occurred: " + e.getMessage());
+        try {
+            countUniqueWord("FamousPhrases.txt");
+
+            try (Scanner scanner = new Scanner(System.in)) {
+                LOGGER.info("Enter the Zoo's name: ");
+                String zooName = scanner.nextLine();
+                myZoo.setName(zooName);
             }
 
-
-        Visitor visitor = new Visitor();
-        try {
             visitor.setName("Victor");
-        } catch (InvalidNameException e) {
-            LOGGER.error("Name exception occurred: " + e.getMessage());
-        }
-
-        Ticket ticket = new Ticket();
-        ticket.setTicketID(1);
-        ticket.setCost(10);
-
-        try {
+            ticket.setTicketID(1);
+            ticket.setCost(10);
             ticket.setDate("11/17/2023");
-        } catch (ExpiredTicketException e) {
-            LOGGER.error("ExpiredTicketException occurred: " + e.getMessage());
-        }
+            visitor.setTicket(ticket);
+            myZoo.addVisitor(visitor);
 
-        visitor.setTicket(ticket);
-        myZoo.addVisitor(visitor);
+            welcomeVisitor();
 
-        welcomeVisitor();
+            myZoo.addLocation("Tiger's Den");
+            myZoo.addLocation("Eagle's cage");
+            myZoo.addLocation("Crocodile pool");
 
-        myZoo.addLocation("Tiger's Den");
-        myZoo.addLocation("Eagle's cage");
-        myZoo.addLocation("Crocodile pool");
+            tiger = new Tiger(myZoo);
+            tiger.setSex(Sex.MALE);
+            myZoo.addAnimal(tiger);
+            LOGGER.info(tiger);
 
-        Tiger tiger = new Tiger(myZoo);
-        tiger.setSex(Sex.MALE);
-        myZoo.addAnimal(tiger);
-        LOGGER.info(tiger);
+            eagle = new BaldEagle(myZoo);
+            eagle.setSex(Sex.FEMALE);
+            eagle.setCanFly(true);
+            myZoo.addAnimal(eagle);
+            LOGGER.info(eagle);
 
-        BaldEagle eagle = new BaldEagle(myZoo);
-        eagle.setSex(Sex.FEMALE);
-        eagle.setCanFly(true);
-        myZoo.addAnimal(eagle);
-        LOGGER.info(eagle);
+            croc = new Crocodile(myZoo);
+            croc.setSex(Sex.MALE);
+            croc.setIsVenomous(false);
+            myZoo.addAnimal(croc);
+            LOGGER.info(croc);
 
-        Crocodile croc = new Crocodile(myZoo);
-        croc.setSex(Sex.MALE);
-        croc.setIsVenomous(false);
-        myZoo.addAnimal(croc);
-        LOGGER.info(croc);
+            CustomLinkedList linkedList = new CustomLinkedList();
+            linkedList.add(tiger);
+            linkedList.add(croc);
+            linkedList.add(eagle);
+            linkedList.get(1);
+            linkedList.remove(tiger);
+            linkedList.remove(croc);
+            linkedList.remove(eagle);
 
-        CustomLinkedList linkedList = new CustomLinkedList();
-        linkedList.add(tiger);
-        linkedList.add(croc);
-        linkedList.add(eagle);
-        linkedList.get(1);
-        linkedList.remove(tiger);
-        linkedList.remove(croc);
-        linkedList.remove(eagle);
-
-        ZooKeeper zooKeeper = new ZooKeeper();
-        try {
             zooKeeper.setName("Pieter");
-        } catch (InvalidNameException e) {
-            LOGGER.error("NameException occurred: " + e.getMessage());
-        }
+            zooKeeper.setNumFood(0);
+            myZoo.addZooKeeper(zooKeeper);
 
-        zooKeeper.setNumFood(0);
-        myZoo.addZooKeeper(zooKeeper);
-
-        try {
             visitor.setLocation("Tiger's Den", myZoo);
             tiger.setLocation("Tiger's Den", myZoo);
             zooKeeper.setLocation("Tiger's Den", myZoo);
-        } catch (LocationException e) {
-            LOGGER.error("LocationException occurred: " + e.getMessage());
+
+            tiger.showSpecies();
+            zooKeeper.feedAnimal(tiger);
+
+        } catch (IOException | InvalidNameException | ExpiredTicketException | LocationException | FeedAnimalException e) {
+            LOGGER.error("Exception occurred: ", e);
         }
 
         LOGGER.info("Welcome to " + myZoo.getName());
         LOGGER.info("We have " + myZoo.getAnimals().size() + " animals.");
-
-        tiger.showSpecies();
-        try {
-            zooKeeper.feedAnimal(tiger);
-        } catch (FeedAnimalException e) {
-
-            LOGGER.error("FeedAnimalException occurred: " + e.getMessage());
-        }
-
     }
 }
