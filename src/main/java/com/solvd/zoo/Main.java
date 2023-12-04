@@ -12,10 +12,8 @@ import com.solvd.zoo.linkedlist.CustomLinkedList;
 import com.solvd.zoo.ticket.Ticket;
 import com.solvd.zoo.person.Visitor;
 import com.solvd.zoo.person.ZooKeeper;
-
 import java.io.IOException;
 import java.util.Scanner;
-
 import static com.solvd.zoo.Zoo.welcomeVisitor;
 import static com.solvd.zoo.wordcounter.CountUniqueWords.countUniqueWord;
 
