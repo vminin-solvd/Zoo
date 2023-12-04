@@ -11,7 +11,6 @@ import java.util.Map;
 public class CountUniqueWords {
 
     public static void countUniqueWord(String fileName) throws IOException{
-
             File file = new File(getResourcePath(fileName));
             String fileContent = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             String[] words = fileContent.split("\\s+");
