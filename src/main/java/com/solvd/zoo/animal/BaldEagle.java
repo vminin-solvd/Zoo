@@ -1,5 +1,6 @@
 package com.solvd.zoo.animal;
 
+import com.solvd.zoo.enums.ZooLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.zoo.Zoo;
@@ -18,7 +19,7 @@ public final class BaldEagle extends Bird implements IPlay, IDance, IAttack {
     }
 
     public BaldEagle(Zoo zoo) throws LocationException {
-        this.setLocation("Eagle's cage", zoo);
+        this.setLocation(ZooLocation.BIRDCAGE, zoo);
     }
 
     @Override

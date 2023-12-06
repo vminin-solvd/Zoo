@@ -3,20 +3,21 @@ package com.solvd.zoo.animal;
 import com.solvd.zoo.Zoo;
 import com.solvd.zoo.enums.DietType;
 import com.solvd.zoo.enums.Sex;
+import com.solvd.zoo.enums.ZooLocation;
 import com.solvd.zoo.exceptions.LocationException;
 
 public abstract class Animal {
 
-    private String location;
+    private ZooLocation location;
     private Sex sex;
     private String name;
     private DietType dietType;
 
-    public String getLocation() {
+    public ZooLocation getLocation() {
         return location;
     }
 
-    public void setLocation(String location, Zoo zoo) throws LocationException {
+    public void setLocation(ZooLocation location, Zoo zoo) throws LocationException {
 
         if (!(zoo.getLocations().contains(location))) {
             throw new LocationException("This location has not been added to the zoo");

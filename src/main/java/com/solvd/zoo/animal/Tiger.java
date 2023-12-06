@@ -1,4 +1,5 @@
 package com.solvd.zoo.animal;
+import com.solvd.zoo.enums.ZooLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.zoo.Zoo;
@@ -18,7 +19,7 @@ public class Tiger extends Mammal implements IPlay, IDance, IAttack {
     static int tigerCount = 0;
 
     public Tiger(Zoo zoo) throws LocationException {
-        this.setLocation("Tiger's Den", zoo);
+        this.setLocation(ZooLocation.TIGERCAGE, zoo);
         tigerCount++;
     }
 

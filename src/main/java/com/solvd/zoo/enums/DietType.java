@@ -1,5 +1,7 @@
 package com.solvd.zoo.enums;
 
+import static com.solvd.zoo.enums.Food.*;
+
 public enum DietType {
     CARNIVORE(true),
     OMNIVORE(false),
@@ -15,14 +17,7 @@ public enum DietType {
         return isStrict;
     }
 
-    public boolean isFoodCompatible(String food) {
-        if (this == CARNIVORE && food.equalsIgnoreCase("meat")) {
-            return true;
-        } else if (this == OMNIVORE) {
-            return true; // Omnivores can eat pretty much anything
-        } else if (this == HERBIVORE && !food.equalsIgnoreCase("meat")) {
-            return true;
-        }
-        return false;
+    public boolean isFoodCompatible(Food food) {
+        return (this == CARNIVORE && food == MEAT) || (this == OMNIVORE) || (this == HERBIVORE && (food == VEGETABLES || food == FRUITS));
     }
 }
