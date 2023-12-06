@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import com.solvd.zoo.enums.ZooLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.zoo.animal.Animal;
@@ -22,7 +23,7 @@ public class Zoo {
     private List<Animal> animals = new ArrayList<>();
     private Queue<Visitor> visitors = new LinkedList<>();
     private Map<Integer, Visitor> complainers = new TreeMap<>();
-    private Set<String> locations = new HashSet<>();
+    private Set<ZooLocation> locations = new HashSet<>();
     private HashMap<String, ZooKeeper> zookeepers = new HashMap<>();
 
     public static void welcomeVisitor() {
@@ -62,11 +63,11 @@ public class Zoo {
         return complainers;
     }
 
-    public Set<String> getLocations() {
+    public Set<ZooLocation> getLocations() {
         return this.locations;
     }
 
-    public void addLocation(String location) {
+    public void addLocation(ZooLocation location) {
         locations.add(location);
     }
 
@@ -83,7 +84,7 @@ public class Zoo {
         return visitors.poll();
     }
 
-    public void moveLocation(Person person, String location) throws LocationException {
+    public void moveLocation(Person person, ZooLocation location) throws LocationException {
         if (locations.contains(location)) {
             person.setLocation(location, this);
         } else {

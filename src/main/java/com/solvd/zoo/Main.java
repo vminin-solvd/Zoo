@@ -2,7 +2,7 @@ package com.solvd.zoo;
 
 import com.solvd.zoo.interfaces.ICheckCondition;
 import com.solvd.zoo.interfaces.ICompareAttributes;
-import com.solvd.zoo.interfaces.IUpdateString;
+import com.solvd.zoo.interfaces.IUpdateZooLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.zoo.animal.*;
@@ -60,9 +60,9 @@ public class Main {
 
             welcomeVisitor();
 
-            myZoo.addLocation("Tiger's Den");
-            myZoo.addLocation("Eagle's cage");
-            myZoo.addLocation("Crocodile pool");
+            myZoo.addLocation(ZooLocation.TIGERCAGE);
+            myZoo.addLocation(ZooLocation.BIRDCAGE);
+            myZoo.addLocation(ZooLocation.REPTILECAGE);
 
             tiger = new Tiger(myZoo);
             tiger.setSex(Sex.MALE);
@@ -121,14 +121,14 @@ public class Main {
             boolean isTigerDietStrict = strictDietChecker.check(tiger);
             LOGGER.info("Does Tiger have a strict diet? " + isTigerDietStrict);
 
-            IUpdateString<Animal> locationUpdater = (animal, newLocation) -> {
+            IUpdateZooLocation<Animal> locationUpdater = (animal, newLocation) -> {
                 try {
                     animal.setLocation(newLocation, myZoo);
                 } catch (LocationException e){
                     LOGGER.error("Location Exception occurred", e);
                 }
             };
-            locationUpdater.update(eagle, "New Eagle's Cage");
+            locationUpdater.update(eagle, ZooLocation.TIGERCAGE);
             LOGGER.info("Eagle's new location: " + eagle.getLocation());
 
             CustomLinkedList linkedList = new CustomLinkedList();
@@ -144,9 +144,9 @@ public class Main {
             zooKeeper.setNumFood(0);
             myZoo.addZooKeeper(zooKeeper);
 
-            visitor.setLocation("Tiger's Den", myZoo);
-            tiger.setLocation("Tiger's Den", myZoo);
-            zooKeeper.setLocation("Tiger's Den", myZoo);
+            visitor.setLocation(ZooLocation.TIGERCAGE, myZoo);
+            tiger.setLocation(ZooLocation.TIGERCAGE, myZoo);
+            zooKeeper.setLocation(ZooLocation.TIGERCAGE, myZoo);
 
             tiger.showSpecies();
             zooKeeper.feedAnimal(tiger);
