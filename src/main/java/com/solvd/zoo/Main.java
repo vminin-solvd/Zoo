@@ -54,7 +54,7 @@ public class Main {
             visitor.setName("Victor");
             ticket.setTicketID(1);
             ticket.setCost(10);
-            ticket.setDate("12/05/2023");
+            ticket.setDate("12/06/2023");
             visitor.setTicket(ticket);
             myZoo.addVisitor(visitor);
 

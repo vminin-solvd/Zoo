@@ -23,6 +23,7 @@ public enum Season {
     }
 
     public String getSeasonDescription() {
-        return "During " + this.name().toLowerCase() + ", the temperature is typically " + temperature + ". " + suggestedActivity + " is recommended.";
+        return "During " + this.name().toLowerCase() +
+                ", the temperature is typically " + temperature + ". " + suggestedActivity + " is recommended.";
     }
 }
