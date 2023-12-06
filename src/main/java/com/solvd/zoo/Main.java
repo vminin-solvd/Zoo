@@ -15,7 +15,6 @@ import com.solvd.zoo.linkedlist.CustomLinkedList;
 import com.solvd.zoo.ticket.Ticket;
 import com.solvd.zoo.person.Visitor;
 import com.solvd.zoo.person.ZooKeeper;
-
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.function.*;
