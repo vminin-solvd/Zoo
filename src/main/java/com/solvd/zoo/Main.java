@@ -17,9 +17,14 @@ import com.solvd.zoo.person.Visitor;
 import com.solvd.zoo.person.ZooKeeper;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Constructor;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.function.*;
+import java.util.stream.Collectors;
 
 import static com.solvd.zoo.Zoo.welcomeVisitor;
 import static com.solvd.zoo.wordcounter.CountUniqueWords.countUniqueWord;
@@ -150,15 +155,56 @@ public class Main {
             zooKeeper.setLocation(ZooLocation.TIGERCAGE, myZoo);
 
             Class<?> tigerClass = tiger.getClass();
+            Constructor<?> constructor = tigerClass.getDeclaredConstructor(Zoo.class);
+            Object tigerObject = constructor.newInstance(myZoo);
+            Tiger tigerInstance = (Tiger)  tigerObject;
+            tigerInstance.makeSound();
             Field speciesField = tigerClass.getDeclaredField("species");
             speciesField.setAccessible(true);
-            speciesField.set(tiger, "Panthera tigris altaica");
+            speciesField.set(tigerInstance, "Panthera tigris altaica");
+            String newSpecies = (String) speciesField.get(tigerInstance);
+            LOGGER.info("This is the new species field: {}", newSpecies);
 
+            long maleCount = myZoo.getAnimals().stream().filter(animal -> animal.getSex() == Sex.MALE).count();
+            LOGGER.info("Total number of males: " + maleCount);
+
+            List<String> uppercaseNames = myZoo.getAnimals().stream().map(animal -> animal.getName()
+                    .toUpperCase()).collect(Collectors.toList());
+            LOGGER.info("Here are the animal names in uppercase");
+            uppercaseNames.forEach(name -> LOGGER.info(name));
+
+            ZooLocation locationToCheck = ZooLocation.BIRDCAGE;
+            boolean locationExists = myZoo.getLocations().stream().anyMatch(location -> location == locationToCheck);
+            LOGGER.info(locationToCheck + " exists?: " + locationExists);
+
+            List<Animal> carnivores = myZoo.getAnimals().stream()
+                .filter(animal -> animal.getDietType() == DietType.CARNIVORE)
+                .collect(Collectors.toList());
+            LOGGER.info("Carnivore Animals:");
+            carnivores.forEach(animal -> LOGGER.info(animal.getName()));
+            
+            List<String> zookeeperNames = myZoo.getZookeepers().values().stream()
+                .map(zookeeper -> zookeeper.getName())
+                .collect(Collectors.toList());
+            LOGGER.info("Zookeeper Names:");
+            zookeeperNames.forEach(name -> LOGGER.info(name));
+
+            Map<Sex, List<Animal>> animalsBySex = myZoo.getAnimals().stream()
+                .collect(Collectors.groupingBy(animal -> animal.getSex()));
+            animalsBySex.forEach((sex, animals) -> {
+                LOGGER.info("Sex: " + sex);
+                animals.forEach(animal -> LOGGER.info("- " + animal.getName()));
+            });
+
+            boolean allTicketsTenDollars = myZoo.getVisitors().stream()
+                .allMatch(v -> v.getTicket().getCost() == 10);
+            LOGGER.info("Are all visitor's tickets $10?: " + allTicketsTenDollars);
 
             tiger.showSpecies();
             zooKeeper.feedAnimal(tiger);
-
-        } catch (IOException | NoSuchFieldException | IllegalAccessException | InvalidNameException | ExpiredTicketException | LocationException | FeedAnimalException e) {
+        } catch (IOException | NoSuchFieldException | InstantiationException | InvocationTargetException
+                 | NoSuchMethodException | IllegalAccessException | InvalidNameException
+                 | ExpiredTicketException | LocationException | FeedAnimalException e) {
             LOGGER.error("Exception occurred: ", e);
         }
 
