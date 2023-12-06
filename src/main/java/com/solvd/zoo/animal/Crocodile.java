@@ -1,4 +1,5 @@
 package com.solvd.zoo.animal;
+import com.solvd.zoo.enums.ZooLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.zoo.Zoo;
@@ -13,7 +14,7 @@ public final class Crocodile extends Reptile implements IPlay, IDance, IAttack {
 
     public Crocodile(Zoo zoo) throws LocationException {
         this.setIsVenomous(false);
-        this.setLocation("Crocodile pool", zoo);
+        this.setLocation(ZooLocation.REPTILECAGE, zoo);
     }
 
     @Override
