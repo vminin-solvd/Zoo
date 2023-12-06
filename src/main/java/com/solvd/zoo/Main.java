@@ -16,6 +16,7 @@ import com.solvd.zoo.ticket.Ticket;
 import com.solvd.zoo.person.Visitor;
 import com.solvd.zoo.person.ZooKeeper;
 
+import java.lang.reflect.Field;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.function.*;
@@ -54,7 +55,7 @@ public class Main {
             visitor.setName("Victor");
             ticket.setTicketID(1);
             ticket.setCost(10);
-            ticket.setDate("12/05/2023");
+            ticket.setDate("12/06/2023");
             visitor.setTicket(ticket);
             myZoo.addVisitor(visitor);
 
@@ -148,10 +149,16 @@ public class Main {
             tiger.setLocation("Tiger's Den", myZoo);
             zooKeeper.setLocation("Tiger's Den", myZoo);
 
+            Class<?> tigerClass = tiger.getClass();
+            Field speciesField = tigerClass.getDeclaredField("species");
+            speciesField.setAccessible(true);
+            speciesField.set(tiger, "Panthera tigris altaica");
+
+
             tiger.showSpecies();
             zooKeeper.feedAnimal(tiger);
 
-        } catch (IOException | InvalidNameException | ExpiredTicketException | LocationException | FeedAnimalException e) {
+        } catch (IOException | NoSuchFieldException | IllegalAccessException | InvalidNameException | ExpiredTicketException | LocationException | FeedAnimalException e) {
             LOGGER.error("Exception occurred: ", e);
         }
 
