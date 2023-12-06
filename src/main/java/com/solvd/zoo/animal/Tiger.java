@@ -23,7 +23,7 @@ public class Tiger extends Mammal implements IPlay, IDance, IAttack {
         tigerCount++;
     }
 
-    public final String species = "Panthera tigris";
+    public final String species = "Panthera tigris tigris";
 
     public final void showSpecies() {
         LOGGER.info("Species: " + species);
