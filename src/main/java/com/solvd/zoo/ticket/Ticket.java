@@ -43,10 +43,8 @@ public class Ticket {
     }
 
     public void setDate(String dateString) throws ExpiredTicketException {
-        DateHandler dateHandler = new DateHandler();
-        Date ticketDate = dateHandler.convertDate(dateString);
-        this.date = ticketDate;
-        dateHandler.checkDate(dateString);
+        DateHandler.checkDate(dateString);
+        this.date = DateHandler.convertDate(dateString);
     }
 
     @Override
