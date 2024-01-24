@@ -70,6 +70,6 @@ public class CustomLinkedList<T> {
             currentIndex++;
             currentNode = currentNode.next;
         }
-        return null; // FIXME Throw an exception if index is out of bounds
+        return null;
     }
 }
